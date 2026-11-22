@@ -26,9 +26,14 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      - name: Set up Android SDK tools
+        uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: false
+
       - name: Accept Android SDK licenses and install build components
         run: |
-          yes | sdkmanager --licenses || true
+          for i in {1..20}; do echo y; done | sdkmanager --licenses
           sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;36.0.0" "ndk;25.1.8937393" "cmake;3.22.1"
 
       - name: Install Vulkan shader compiler
