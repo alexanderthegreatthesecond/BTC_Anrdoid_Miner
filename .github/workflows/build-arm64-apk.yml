@@ -26,10 +26,10 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Set up Android SDK tools
-        uses: android-actions/setup-android@v3
-        with:
-          accept-android-sdk-licenses: false
+      - name: Add preinstalled Android SDK tools to PATH
+        run: |
+          test -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
 
       - name: Accept Android SDK licenses and install build components
         run: |
